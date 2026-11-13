@@ -1,0 +1,33 @@
+meta {
+  name: 11 Validacion fallida (400)
+  type: http
+  seq: 11
+}
+
+post {
+  url: {{base_url}}/api/alumnos
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "nombre": "",
+    "correo": "esto-no-es-un-correo",
+    "semestre": 99,
+    "carreraId": null
+  }
+}
+
+assert {
+  res.status: eq 400
+  res.body.errores: isDefined
+}
+
+docs {
+  @Valid rechaza el cuerpo y la API devuelve un mapa campo -> mensaje en `errores`.
+}

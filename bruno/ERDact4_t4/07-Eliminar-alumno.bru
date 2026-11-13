@@ -1,0 +1,19 @@
+meta {
+  name: 07 Eliminar alumno
+  type: http
+  seq: 7
+}
+
+delete {
+  url: {{base_url}}/api/alumnos/{{alumno_id}}
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+assert {
+  res.status: eq 204
+}

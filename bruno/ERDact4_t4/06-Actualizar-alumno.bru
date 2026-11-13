@@ -1,0 +1,29 @@
+meta {
+  name: 06 Actualizar alumno
+  type: http
+  seq: 6
+}
+
+put {
+  url: {{base_url}}/api/alumnos/{{alumno_id}}
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "nombre": "Carlos Mendoza Ruiz (actualizado)",
+    "correo": "{{correo_alumno}}",
+    "semestre": 5,
+    "carreraId": 2
+  }
+}
+
+assert {
+  res.status: eq 200
+  res.body.semestre: eq 5
+}

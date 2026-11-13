@@ -1,0 +1,19 @@
+meta {
+  name: 12 Alumno inexistente (404)
+  type: http
+  seq: 12
+}
+
+get {
+  url: {{base_url}}/api/alumnos/999999
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+assert {
+  res.status: eq 404
+}

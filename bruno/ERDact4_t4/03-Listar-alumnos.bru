@@ -1,0 +1,31 @@
+meta {
+  name: 03 Listar alumnos (paginado)
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{base_url}}/api/alumnos?page=0&size=2
+  body: none
+  auth: bearer
+}
+
+params:query {
+  page: 0
+  size: 2
+  ~carreraId: 1
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+assert {
+  res.status: eq 200
+  res.body.contenido: isArray
+}
+
+docs {
+  GET con paginación: `page` (desde 0) y `size` (máximo 50).
+  Opcional: `carreraId` para filtrar por carrera.
+}

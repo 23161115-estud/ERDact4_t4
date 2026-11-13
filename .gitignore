@@ -1,0 +1,8 @@
+target/
+.idea/
+*.iml
+.vscode/
+.DS_Store
+# En el VPS el application.properties con credenciales vive fuera del repositorio
+application-local.properties
+*.log

@@ -1,0 +1,43 @@
+meta {
+  name: 04 Crear alumno
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{base_url}}/api/alumnos
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "nombre": "Carlos Mendoza Ruiz",
+    "correo": "{{correo_alumno}}",
+    "semestre": 4,
+    "carreraId": 1
+  }
+}
+
+script:pre-request {
+  bru.setEnvVar("correo_alumno", "alumno" + Date.now() + "@escuela.mx");
+}
+
+script:post-response {
+  if (res.status === 201) {
+    bru.setEnvVar("alumno_id", res.body.id);
+  }
+}
+
+assert {
+  res.status: eq 201
+  res.body.carreraNombre: isString
+}
+
+docs {
+  Responde 201 con encabezado Location. Guarda el id en `alumno_id` para los siguientes pasos.
+}

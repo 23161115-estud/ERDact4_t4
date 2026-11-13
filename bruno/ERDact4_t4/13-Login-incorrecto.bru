@@ -1,0 +1,22 @@
+meta {
+  name: 13 Login con password incorrecto (401)
+  type: http
+  seq: 13
+}
+
+post {
+  url: {{base_url}}/api/auth/login
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "correo": "{{correo}}",
+    "password": "contraseña-equivocada"
+  }
+}
+
+assert {
+  res.status: eq 401
+}

@@ -1,0 +1,19 @@
+meta {
+  name: 10 Token inventado (401)
+  type: http
+  seq: 10
+}
+
+get {
+  url: {{base_url}}/api/alumnos
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: esto.no.es.un.jwt
+}
+
+assert {
+  res.status: eq 401
+}
